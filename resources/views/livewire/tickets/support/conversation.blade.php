@@ -1,5 +1,6 @@
 <div class="relative"
     data-test-id="conversation-box"
+     wire:poll.1s
      x-data="{
         scrollToBottom: function(){
             this.$nextTick(()=>{
