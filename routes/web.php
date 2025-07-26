@@ -9,6 +9,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/ticket/create', \App\Livewire\Tickets\Create::class)->name('ticket.create');
+Route::get('/ticket/placed', \App\Livewire\Tickets\Placed::class)->name('ticket.placed');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
