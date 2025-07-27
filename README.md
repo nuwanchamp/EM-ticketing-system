@@ -52,6 +52,7 @@ Then you can move it to the project folder and continue the above steps from `De
 - Event decoupling through event listeners and job queues for better service isolation
 - Middleware level route restrictions
 - TDD development
+- Github actions for lint and tests
 --- 
 
 ### Assumptions:
