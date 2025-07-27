@@ -4,7 +4,7 @@ This system is designed and developed for the assignment of Elegent Media. Syste
 ticket, checking status and interacting with the agen/client and ticket administration. For more information you can 
 check on the [Requirement.md](https://github.com/nuwanchamp/EM-ticketing-system/blob/main/Requirements.md) and 
 screenshots are available inside the docs' folder.
-![Ticketing System Screenshot]('https://github.com/nuwanchamp/EM-ticketing-system/blob/main/doc/screenshots/Screenshot-from-2025-07-28-00-29-15.png')
+![Ticketing System Screenshot](docs/screenshots/Screenshot-from-2025-07-28-00-29-15.png)
 
 ## Installation
 you can install the system using the following ways.
