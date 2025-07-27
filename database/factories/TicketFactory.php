@@ -22,7 +22,8 @@ class TicketFactory extends Factory
             'email' => $this->faker->email(),
             'phone' => $this->faker->phoneNumber(),
             'issue' => $this->faker->text(),
-            'status' => 'open',
+            'token' => $this->faker->uuid(),
+            'status' => 'pending',
             'created_at' => now(),
         ];
     }

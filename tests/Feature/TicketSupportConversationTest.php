@@ -13,7 +13,23 @@ it('will render inside the placed component', function () {
         ->assertSee('data-test-id="conversation-box"', false);
 });
 
-it('will send messages when send button clicked', function () {
+it('will set ticket property', function () {
     $ticket = Ticket::factory()->create(['token' => '1235']);
-    Livewire::withQueryParams($ticket->toArray())->test(Conversation::class)->assertSet('ticket', $ticket);
+    Livewire::test(Conversation::class, ['ticket' => $ticket])->assertSet('ticket', $ticket);
+});
+
+it('will send message on submission', function () {
+    $ticket = Ticket::factory()->create(['token' => '1235']);
+    Livewire::test(Conversation::class, ['ticket' => $ticket])
+        ->set('messageContent', 'Test Message')
+        ->call('sendMessage');
+    $this->assertDatabaseHas('messages', ['content' => 'Test Message', 'ticket_id' => $ticket->id]);
+});
+it('will not send message on submission if message is empty', function () {
+    $ticket = Ticket::factory()->create(['token' => '1235']);
+    $livewire = Livewire::test(Conversation::class, ['ticket' => $ticket])
+        ->set('messageContent', '')
+        ->call('sendMessage');
+    $livewire->assertHasErrors(['messageContent']);
+    $this->assertDatabaseMissing('messages', ['content' => '', 'ticket_id' => $ticket->id]);
 });

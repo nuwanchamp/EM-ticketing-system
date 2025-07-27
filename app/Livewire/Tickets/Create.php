@@ -2,6 +2,9 @@
 
 namespace App\Livewire\Tickets;
 
+use App\Contracts\TicketAssignerInterface;
+use App\Enums\TicketState;
+use App\Events\TicketCreated;
 use App\Models\Ticket;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -19,8 +22,16 @@ class Create extends Component
      * @var ArrayKey email
      * @var ArrayKey phone
      * @var ArrayKey issue
+     * @var ArrayKey status
+     * @var ArrayKey 'user_id'
      */
     public array $formData = [];
+
+    public function ticketAssigner(): TicketAssignerInterface
+    {
+        return app(TicketAssignerInterface::class);
+
+    }
 
     protected function messages(): array
     {
@@ -44,10 +55,19 @@ class Create extends Component
 
     public function createTicket(): void
     {
-
         $this->validate();
-        data_set($this->formData, 'token', Str::uuid()->toString());
-        Ticket::factory()->create([...$this->formData]);
+        $this->setTicketData('token', Str::uuid()->toString());
+        $this->setTicketData('status', TicketState::PENDING);
+        $nextAgent = $this->ticketAssigner()->getNextAgent();
+
+        $ticket = new Ticket();
+        $ticket->fill($this->formData);
+        $ticket->agent()->associate($nextAgent);
+        $ticket->save();
+
+        $ticket->refresh();
+
+        TicketCreated::dispatch($ticket);
 
         $this->redirect(route('ticket.placed', ['uuid' => data_get($this->formData, 'token')]), true);
     }
@@ -55,5 +75,10 @@ class Create extends Component
     public function render()
     {
         return view('livewire.tickets.create')->layout('components.layouts.public');
+    }
+
+    private function setTicketData(string $key, mixed $value): void
+    {
+        data_set($this->formData, $key, $value);
     }
 }

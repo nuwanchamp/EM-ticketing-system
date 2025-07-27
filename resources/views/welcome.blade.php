@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns:flux="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,7 +56,9 @@
         </span>
         <h1 class=" text-xl text-primary text-center "> {{'Online Ticketing System'}}</h1>
         <p class="text-gray-400 text-center"> Lorem ipsum site amente</p>
-        <h2 class=" text-3xl text-white text-center mt-10 "> {{\Illuminate\Support\Str::upper('Welcome')}}</h2>
+        <div class="mt-6 flex justify-center">
+            <a class="btn btn-primary bg-white text-shadow-zinc-950 font-semibold py-2 px-4 rounded-xl" href="{{ route('ticket.create') }}"> Open a Ticket</a>
+        </div>
     </main>
 </div>
 

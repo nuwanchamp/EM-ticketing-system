@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TicketState;
 use App\Livewire\Tickets\Placed;
 use App\Models\Ticket;
 use Livewire\Livewire;
@@ -50,5 +51,18 @@ it('will poll for updates at specified intervals', function () {
         'token' => '1234',
     ]);
     $this->get('ticket/placed?uuid=1234')->assertSee('wire:poll.5s="refreshTicket"', false);
+
+});
+it('will update the ticket status from "assigned" to  "opened', function () {
+    $user = \App\Models\User::factory()->create([
+        'name' => 'Test agent',
+    ]);
+    $ticket = Ticket::factory()->create([
+        'user_id' => $user->id,
+    ]);
+    expect($ticket->status)->toBe('pending');
+    $this->actingAs($user);
+    $this->get('ticket/placed?uuid='.$ticket->token);
+    expect($ticket->fresh()->status)->toBe(TicketState::OPENED->value);
 
 });

@@ -1,9 +1,12 @@
 <div class="container mx-auto">
-    <div class="lg:w-1/2 md:w-full mx-auto">
+    <div class="lg:w-1/3 md:w-full mx-auto">
         <form class="dark border-b-gray-400  rounded w-full">
             <div class="py-4">
 
                 <div class="flex w-full flex-col text-center">
+                     <span class="flex justify-center h-36">
+                            <x-app-logo-icon class="size-9"/>
+                    </span>
                     <flux:heading size="xl">{{ $title }}</flux:heading>
                     <flux:subheading>{{ $description }}</flux:subheading>
                 </div>
@@ -22,7 +25,7 @@
                 <div class="flex-1/2 mb-6">
                     <flux:field>
                         <flux:label>Email</flux:label>
-                        <flux:input wire:model="formData.email" type="email" required/>
+                        <flux:input wire:model="formData.email" type="email" placeholder="john@example.com" required/>
                         <flux:error name="formData.email"/>
                     </flux:field>
                 </div>
@@ -43,6 +46,7 @@
                             placeholder="I have an issue with..."
                             wire:model="formData.issue"
                         />
+                        <flux:error name="formData.issue"/>
                     </flux:field>
                 </div>
             </div>

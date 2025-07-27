@@ -23,6 +23,7 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
     --color-primary: #b37d00;
+    --color-primary-accent: #654600;
     --color-secondary: #7d5804;
     --color-accent: var(--color-neutral-800);
     --color-accent-content: var(--color-neutral-800);
@@ -61,7 +62,10 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
-
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */
+tr.new td{
+    @apply border-amber-700 border-t border-b relative;
+}
+tr.new td:first-of-type::before{
+    content: 'new';
+   @apply bg-zinc-950 text-xs right-3 rounded-3xl block text-center py-1 px-3 absolute;
+}

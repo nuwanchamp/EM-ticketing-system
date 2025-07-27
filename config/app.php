@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\SimpleTicketAssigner;
+
 return [
 
     /*
@@ -121,6 +123,14 @@ return [
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
+    ],
+
+    'pagination' => [
+        'per_page' => env('PAGINATION_PER_PAGE', 10),
+    ],
+
+    'ticketing' => [
+        'ticket_assigner' => SimpleTicketAssigner::class,
     ],
 
 ];

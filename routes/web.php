@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\Dashboard;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -9,12 +10,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/ticket/create', \App\Livewire\Tickets\Create::class)->name('ticket.create');
-Route::get('/ticket/placed', \App\Livewire\Tickets\Placed::class)->name('ticket.placed');
+Route::middleware(['web'])->group(function () {
+    Route::get('/ticket/create', \App\Livewire\Tickets\Create::class)->name('ticket.create');
+    Route::get('/ticket/placed', \App\Livewire\Tickets\Placed::class)->name('ticket.placed');
+});
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
