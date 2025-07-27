@@ -8,7 +8,6 @@ use App\Events\TicketCreated;
 use App\Models\Ticket;
 use Illuminate\Support\Str;
 use Livewire\Component;
-use phpDocumentor\Reflection\Types\ArrayKey;
 
 class Create extends Component
 {
@@ -17,15 +16,23 @@ class Create extends Component
     public string $description = 'Please fill out the form below and we will get back to you as soon as possible.';
 
     /**
-     * @var ArrayKey token
-     * @var ArrayKey name
-     * @var ArrayKey email
-     * @var ArrayKey phone
-     * @var ArrayKey issue
-     * @var ArrayKey status
-     * @var ArrayKey 'user_id'
+     * Form data for ticket creation
+     *
+     * @var array{
+     *     token?: string,
+     *     name: string,
+     *     email: string,
+     *     phone?: string|null,
+     *     issue: string,
+     *     status?: string,
+     *     user_id?: int|null
+     * } $formData
      */
-    public array $formData = [];
+    public array $formData = [
+        'name' => '',
+        'email' => '',
+        'issue' => '',
+    ];
 
     public function ticketAssigner(): TicketAssignerInterface
     {
@@ -40,6 +47,7 @@ class Create extends Component
           'formData.name.required' => 'Customer name is required',
           'formData.email.required' => 'Customer email is required',
           'formData.email.email' => 'Customer email is invalid',
+          'formData.phone.max' => 'Invalid Phone Number',
         ];
     }
 
@@ -49,7 +57,7 @@ class Create extends Component
             'formData.name' => 'required|string',
             'formData.email' => 'required|email',
             'formData.issue' => 'required|string',
-            'formData.phone' => 'nullable|string',
+            'formData.phone' => 'nullable|string|max:10',
         ];
     }
 

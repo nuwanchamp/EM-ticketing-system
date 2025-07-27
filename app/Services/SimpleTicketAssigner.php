@@ -7,8 +7,11 @@ use App\Models\User;
 
 class SimpleTicketAssigner implements TicketAssignerInterface
 {
+    /**
+     * @throws \Throwable
+     */
     public function getNextAgent(): User
     {
-        return User::first();
+        return throw_unless(User::first(), new \RuntimeException('No agents available', 500));
     }
 }

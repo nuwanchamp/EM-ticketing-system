@@ -43,3 +43,28 @@ If you are using the zip file you can extract it by using following command
     unzip <zip-filename.zip> 
 ```
 Then you can move it to the project folder and continue the above steps from `Dependency Installation`
+
+---
+
+### Improvements
+- user Livewire for better performance and protection
+- Configurable Ticket Assignment service (Can be further improved for agent load balancing) 
+- Event decoupling through event listeners and job queues for better service isolation
+- Middleware level route restrictions
+- TDD development
+--- 
+
+### Assumptions:
+- After Ticket is created, the user redirects to the ticket page for better UX
+- Ticket will be automatically assigned to an agent
+- All the login users are agents and will not open tickets 
+- Page header excluded due to minimal navigation
+- Agents don't require filtering assigned tickets list by status
+- Customer can Cancel a ticket any time
+- Only the Agent will try to log in/register
+
+
+> [!NOTE]
+> - Some class methods are public to facilitate testing purposes
+> - I have ignored the Site header/Nav for now
+> - Used Laravel Starter kit with minor tweaks for admin Authentication

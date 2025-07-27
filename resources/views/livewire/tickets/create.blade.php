@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="flex justify-center">
-                <flux:button class="w-full" variant="primary" wire:click="createTicket">Submit</flux:button>
+                <flux:button class="w-full" variant="primary" wire:click.throttle.750ms="createTicket">Submit</flux:button>
             </div>
         </form>
     </div>

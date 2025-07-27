@@ -4,6 +4,8 @@ use App\Livewire\Admin\Dashboard;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Livewire\Tickets\Create;
+use App\Livewire\Tickets\Placed;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,8 +13,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['web'])->group(function () {
-    Route::get('/ticket/create', \App\Livewire\Tickets\Create::class)->name('ticket.create');
-    Route::get('/ticket/placed', \App\Livewire\Tickets\Placed::class)->name('ticket.placed');
+    Route::get('/ticket/create', Create::class)->middleware('agentToHome')->name('ticket.create');
+    Route::get('/ticket/placed', Placed::class)->name('ticket.placed');
 });
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
