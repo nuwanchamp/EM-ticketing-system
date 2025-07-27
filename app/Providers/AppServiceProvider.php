@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Contracts\TicketAssignerInterface;
 use App\Events\TicketCreated;
-use App\Listeners\SendTicketAcknoledgement;
+use App\Listeners\SendTicketAcknowledgement;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Services\SimpleTicketAssigner;
@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('view-ticket',
             fn (User $user, Ticket $ticket) => $user->id === (int) $ticket->user_id);
 
-        Event::listen(TicketCreated::class, SendTicketAcknoledgement::class);
+        Event::listen(TicketCreated::class, SendTicketAcknowledgement::class);
 
     }
 }

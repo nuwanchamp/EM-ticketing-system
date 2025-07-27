@@ -36,6 +36,7 @@ class TicketAcknowledgement extends Mailable
     {
         return new Content(
             view: 'mail.ticket-acknowledgement',
+            with: ['uuid' => $this->ticket->token],
         );
     }
 
