@@ -63,6 +63,7 @@ class Placed extends Component
     {
         return Auth::check();
     }
+
     public function getShowBackButtonProperty(): bool
     {
         return Auth::check();

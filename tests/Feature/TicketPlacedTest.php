@@ -33,7 +33,7 @@ it('will display the ticket details page correctly', function () {
 it('will mount ticket details to component with valid uuid', function () {
     $ticket = Ticket::factory()->create([
         'token' => 'valid-uuid',
-        'status' => 'open',
+        'status' => 'opened',
         'name' => 'Test User',
         'issue' => 'Lorem Ipsum issue',
         'email' => 'test@sample.com',

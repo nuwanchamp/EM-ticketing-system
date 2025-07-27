@@ -1,6 +1,6 @@
 @php use Illuminate\Support\Facades\Auth; @endphp
 
-<div class="container mx-auto " wire:poll.5s="refreshTicket">
+<div class="container mx-auto " wire:poll.5s="refreshTicket" data-test-id="conversation-box">
     <div class="flex w-full lg:w-1/2 mx-auto relative">
         @if($this->showBackButton)
             <div class="hidden md:flex">
